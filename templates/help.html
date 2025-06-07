@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Help - National Housing Monitoring System</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='ashoka.png') }}">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #eaf2f8, #d6eaf8);
+            margin: 0;
+            padding: 0;
+            color: #2c3e50;
+        }
+
+        header {
+            background-color: #154360;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 40px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        ul {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+
+        a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            color: #555;
+        }
+.back-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.back-button {
+    padding: 10px 20px;
+    background-color: #154360;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background-color: #1f568b;
+}
+
+  /* Google Translate Button on the top-right */
+    .google-translate {
+        position: fixed; /* Fix the language selector */
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+
+    </style>
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'hi,ml,ta,te,kn,gu,bn,pa,or,mar,ur,ne', // Only Indian languages
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</head>
+<body>
+    <header>
+        <h2>Help & Support</h2>
+    </header>
+ <!-- Google Translate Widget -->
+    <div class="google-translate" id="google_translate_element"></div>
+
+    <div class="container">
+        <h1>Need Assistance?</h1>
+        <p>If you're experiencing issues while using the portal, please review the following:</p>
+        <ul>
+            <li><strong>For Login Issues:</strong> Ensure your credentials are correct. If forgotten, contact support.</li>
+            <li><strong>For Registration:</strong> Ensure all fields are filled properly with valid data.</li>
+            <li><strong>System Errors:</strong> Try refreshing the page or check your internet connection.</li>
+        </ul>
+        <p>Still need help? Visit the <a href="{{ url_for('contact') }}">Contact Us</a> page to get in touch.</p>
+    </div>
+<div class="back-button-container">
+    <a href="javascript:history.back()" class="back-button">Go Back</a>
+</div>
+
+
+    <footer>
+        &copy; 2025 Government of India. All rights reserved.
+    </footer>
+</body>
+</html>

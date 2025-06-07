@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - National Housing Monitoring System</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='ashoka.png') }}">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #eaf2f8, #d6eaf8);
+            background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background-color: #154360;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #dcdcdc;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .ashoka-logo {
+            width: 60px;
+            height: 60px;
+        }
+
+        .google-translate {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .content {
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .content h2 {
+            font-size: 2.3rem;
+            color: #2c3e50;
+            margin-bottom: 40px;
+color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(to bottom, #3498db, #2980b9);
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: bold;
+            box-shadow: 0 6px 0 #1f618d;
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            background: linear-gradient(to bottom, #2980b9, #2471a3);
+            transform: translateY(2px);
+            box-shadow: 0 4px 0 #1f618d;
+        }
+
+        .more-info {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .more-info h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 10px;
+            font-size: 13px;
+            color: #555;
+        }
+.news-ticker {
+            background-color: #f8f9fa;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .news-label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .ticker-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker {
+            display: inline-block;
+            animation: ticker 15s linear infinite;
+        }
+
+        @keyframes ticker {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+    </style>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'hi,ml,ta,te,kn,gu,bn,pa,or,mar,ur,ne',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo" class="ashoka-logo">
+            <div>
+                <h1>Government of India</h1>
+                <p>National Housing Monitoring System</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Google Translate Widget -->
+    <div class="google-translate" id="google_translate_element"></div>
+<div class="news-ticker">
+    <span class="news-label">Latest News:</span>
+    <div class="ticker-wrapper">
+        <div class="ticker">
+            <span>Phase 2 construction begins in Maharashtra | </span>
+            <span>Online application deadline extended to May 15 | </span>
+            <span>New housing policy announced by Ministry | </span>
+            <span>Real-time monitoring feature launched | </span>
+        </div>
+    </div>
+</div>
+
+    <div class="content">
+        <h2>Welcome to the Official Portal</h2>
+        <div class="nav-links">
+            <a href="{{ url_for('register') }}">Register</a>
+            <a href="{{ url_for('user_login') }}">User Login</a>
+            <a href="{{ url_for('admin_login') }}">Admin Login</a>
+            <a href="{{ url_for('faq') }}">FAQ</a>
+            <a href="{{ url_for('contact_and_accessibility') }}">Contact & Accessibility</a>
+            
+        </div>
+    </div>
+
+    <div class="more-info">
+        <h3>More Information</h3>
+        <div class="nav-links">
+            <a href="{{ url_for('contact') }}">Contact Us</a>
+            <a href="{{ url_for('help') }}">Help</a>
+            <a href="{{ url_for('about') }}">About</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Government of India. All rights reserved.
+    </footer>
+</body>
+</html>

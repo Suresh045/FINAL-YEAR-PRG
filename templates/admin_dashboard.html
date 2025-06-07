@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+ <style>
+  
+
+    .container {
+    width: 90%;
+    max-width: 1300px;
+    margin: 150px auto;
+    background: rgba(255, 255, 255, 0.15); /* semi-transparent white */
+    backdrop-filter: blur(12px); /* blur background */
+    -webkit-backdrop-filter: blur(12px); /* Safari support */
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+    h2, h3 {
+        text-align: center;
+        color: #2d3436;
+        margin-bottom: 25px;
+        text-shadow: 1px 1px 2px #dfe6e9;
+    }
+
+    form input[type="text"] {
+        padding: 12px;
+        width: 300px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    form button {
+        padding: 12px 24px;
+        background: linear-gradient(145deg, #3498db, #2980b9);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        transition: all 0.3s ease-in-out;
+    }
+
+    form button:hover {
+        background: linear-gradient(145deg, #2980b9, #1c6691);
+        transform: scale(1.05);
+    }
+
+    .houses-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 15px;
+        margin-top: 30px;
+    }
+
+    .houses-table th, .houses-table td {
+        background: #fff;
+        padding: 14px;
+        border: none;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+    }
+
+    .houses-table th {
+        background: #74b9ff;
+        color: white;
+        text-shadow: 0 1px 1px #2d3436;
+    }
+
+    .houses-table img {
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .navigation-buttons {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .navigation-buttons a button {
+        margin: 10px;
+        padding: 14px 22px;
+        border-radius: 14px;
+        font-size: 1rem;
+        font-weight: bold;
+        border: none;
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .navigation-buttons a button:hover {
+        transform: scale(1.05);
+    }
+
+    .navigation-buttons a:nth-child(1) button { background: #6c5ce7; }
+    .navigation-buttons a:nth-child(2) button { background: #00b894; }
+    .navigation-buttons a:nth-child(3) button { background: #636e72; }
+    .navigation-buttons a:nth-child(4) button { background: #fdcb6e; color: #2d3436; }
+    .navigation-buttons a:nth-child(5) button { background: #e84393; }
+    .navigation-buttons a:nth-child(6) button { background: #0984e3; }
+
+    .logout-btn {
+        display: block;
+        width: 200px;
+        margin: 40px auto 0;
+        padding: 14px;
+        background: linear-gradient(to right, #ff6b6b, #ff4757);
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        border-radius: 14px;
+        font-weight: bold;
+        transition: background 0.3s ease;
+        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+    }
+
+    .logout-btn:hover {
+        background: linear-gradient(to right, #ff3f34, #ff6b6b);
+    }
+   body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background-color: #154360;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #dcdcdc;
+        }
+.fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+        .content {
+            margin-top: 40px;
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 10px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .ashoka-logo {
+            width: 60px;
+            height: 60px;
+            animation: rotate 10s linear infinite;
+        }
+ 
+</style>
+
+    
+</head>
+<body>
+<div class="fixed-header">
+<header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo" class="ashoka-logo">
+            <div>
+                <h1>Government of India</h1>
+                <p>National Housing Monitoring System</p>
+            </div>
+        </div>
+    </header>
+<!-- Notification Icon linking to feedback page -->
+<div id="notification-wrapper" style="position: fixed; top: 20px; right: 30px; z-index: 1000;">
+    <a href="{{ url_for('all_feedbacks') }}" style="position: relative; display: inline-block;">
+        <img src="{{ url_for('static', filename='bell.png') }}" alt="Notifications" width="30">
+        {% if unread_feedback_count > 0 %}
+        <span style="position: absolute; top: -10px; right: -10px; background: red; color: white; border-radius: 50%; padding: 3px 7px; font-size: 12px;">
+            {{ unread_feedback_count }}
+        </span>
+        {% endif %}
+    </a>
+</div>
+</div>
+
+    <div class="container">
+        <h2>Admin Dashboard</h2>
+
+        <h3>list of Houses</h3>
+<form method="GET" action="{{ url_for('admin_dashboard') }}" style="text-align: center; margin-bottom: 20px;">
+    <input type="text" name="search" placeholder="Search by owner name" value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
+
+        <!-- Table to display the approved houses -->
+        <table class="houses-table">
+            <thead>
+                <tr>
+                    <th>Owner Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Address</th>
+                    <th>Satellite Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for house in approved_houses %}
+                <tr>
+                    <td>{{ house.owner_name }}</td>
+                    <td>{{ house.phone_number }}</td>
+                    <td>{{ house.email }}</td>
+                    <td>{{ house.latitude }}</td>
+                    <td>{{ house.longitude }}</td>
+                    <td>{{ house.address }}</td>
+                    <td><img src="{{ url_for('static', filename='uploads/' + house.satellite_image) }}" width="100" height="100" alt="Satellite Image"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation-buttons">
+            <a href="{{ url_for('view_applications') }}">
+                <button>View House Applications</button>
+            </a>
+            <a href="{{ url_for('view_approved_houses') }}">
+                <button style="background-color: green;">View Approved Houses</button>
+            </a>
+            <a href="{{ url_for('view_rejected_houses') }}">
+                <button style="background-color: gray;">View Rejected Houses</button>
+            </a>
+            <a href="{{ url_for('unauthorized_houses') }}">
+                <button style="background-color: orange;">Find Unauthorized Constructions</button>
+            </a>
+            <a href="{{ url_for('view_modification_applications') }}">
+                <button class="btn">View House Modification Applications</button>
+            </a>
+            <a href="{{ url_for('view_submitted_details') }}">
+                <button class="btn">View Submitted Details</button>
+            </a>
+        </div>
+
+        <a class="logout-btn" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+<script>
+    const icon = document.getElementById('notification-icon');
+    const dropdown = document.getElementById('feedbackDropdown');
+
+    icon.addEventListener('click', function () {
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    });
+
+    // Optional: close dropdown when clicking outside
+    document.addEventListener('click', function (event) {
+        if (!document.getElementById('notification-wrapper').contains(event.target)) {
+            dropdown.style.display = "none";
+        }
+    });
+</script>
+
+<footer>
+        &copy; 2025 National Housing Monitoring System. All rights reserved.
+    </footer>
+
+</body>
+</html>

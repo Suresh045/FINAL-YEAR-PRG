@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comparison Result</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(to right, #e0f7fa, #ffffff);
+            color: #2c3e50;
+        }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #007bff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .image-box {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .image-box:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        img {
+            width: 320px;
+            height: auto;
+            border-radius: 12px;
+            border: 3px solid #dee2e6;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .result {
+            font-size: 26px;
+            font-weight: bold;
+            color: #28a745;
+            margin-top: 35px;
+            padding: 15px 30px;
+            background: #eafaf1;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 24px;
+            background: linear-gradient(145deg, #007bff, #0056b3);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(145deg, #0056b3, #004299);
+            box-shadow: 0 8px 16px rgba(0, 86, 179, 0.4);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h2>Comparison Result</h2>
+    <div class="image-box">
+        <h3>Old Image</h3>
+        <img src="{{ url_for('static', filename='uploads/' ~ old_image) }}" alt="Old Image">
+    </div>
+    <div class="image-box">
+        <h3>New Image</h3>
+        <img src="{{ url_for('static', filename='uploads/' ~ new_image) }}" alt="New Image">
+    </div>
+
+    <div class="result">{{ result }}</div>
+    
+<a href="{{ url_for('find_construction', house_id=house.id) }}" class="back-btn">← Back to Image Comparison</a>
+
+</body>
+</html>

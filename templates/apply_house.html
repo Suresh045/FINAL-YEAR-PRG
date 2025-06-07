@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for House Approval</title>
+    <style>
+       
+ body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f2f5, #d9e4f5);
+            background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+ padding-top: 130px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+align-items: center;
+        }
+
+.form-container {
+    background: rgba(255, 255, 255, 0.6); /* semi-transparent white */
+    backdrop-filter: blur(8px); /* Apply blur effect */
+    -webkit-backdrop-filter: blur(8px); /* Safari support */
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    transition: backdrop-filter 0.3s ease;
+}
+
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            background-color: #2980b9;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1c5980;
+        }
+
+        p {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    img {
+            width: 60px;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+        }
+
+        header {
+            width: 100%;
+            background-color: #154360;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+.fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #dcdcdc;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 10px;
+            font-size: 13px;
+            color: #555;
+            text-align: center;
+        }
+ /* Google Translate Button on the top-right */
+    .google-translate {
+        position: fixed; /* Fix the language selector */
+        top: 20px;
+        right: 20px;
+        z-index: 100;
+    }
+    </style>
+  <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'hi,ml,ta,te,kn,gu,bn,pa,or,mar,ur,ne', // Only Indian languages
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</head>
+<body>
+<div class="fixed-header">
+<header>
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo" class="ashoka-logo">
+        <div>
+            <h1>Government of India</h1>
+            <p>National Housing Monitoring System</p>
+        </div>
+    </div>
+</header>
+  <!-- Google Translate Widget -->
+    <div class="google-translate" id="google_translate_element"></div>
+
+</div>
+    <div class="form-container">
+        <h2>Apply for House Approval</h2>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <label>Owner Name:</label>
+            {{ form.owner_name(size=32) }}
+<label>Phone Number:</label>
+{{ form.phone_number(size=32) }}
+
+<label>Email:</label>
+{{ form.email(size=32) }}
+
+
+            <label>Latitude:</label>
+            {{ form.latitude(size=32) }}
+
+            <label>Longitude:</label>
+            {{ form.longitude(size=32) }}
+
+            <label>House Address:</label>
+            {{ form.house_address(size=32) }}
+
+            <button type="submit">Submit Application</button>
+        </form>
+        <p><a href="{{ url_for('user_dashboard') }}">← Back to Dashboard</a></p>
+    </div>
+
+<footer>
+    &copy; 2025 National Housing Monitoring System. All rights reserved.
+</footer>
+
+</body>
+</html>

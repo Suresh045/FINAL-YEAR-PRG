@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unauthorized Construction Detection</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    table {
+      width: 95%;
+      margin: auto;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+    }
+
+    tr:hover {
+      background-color: #f1f9ff;
+    }
+
+    img {
+      width: 60px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-detect {
+      padding: 10px 16px;
+      background-color: #17a2b8;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-detect:hover {
+      background-color: #138496;
+    }
+
+    .btn-delete {
+      padding: 10px 16px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-delete:hover {
+      background-color: #c82333;
+    }
+
+    .back-btn {
+  margin: 30px auto;
+  display: block;
+  background: #007bff;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  width: fit-content;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+
+    @media screen and (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      tr {
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th {
+        display: none;
+      }
+      td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+      }
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        text-align: left;
+        font-weight: bold;
+        color: #333;
+      }
+    }
+
+    header {
+      width: 100%;
+      background-color: #154360;
+      color: white;
+      padding: 20px 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      color: #dcdcdc;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 10px;
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<header>
+    <div class="logo-container">
+      <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo" class="ashoka-logo">
+      <div>
+        <h1>Government of India</h1>
+        <p>National Housing Monitoring System</p>
+      </div>
+    </div>
+  </header>
+  <h2>Approved Houses - Unauthorized Construction Check</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Owner Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Address</th>
+        <th>Satellite Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for house in approved_houses %}
+      <tr>
+        <td data-label="Owner Name">{{ house.owner_name }}</td>
+        <td data-label="Phone Number">{{ house.phone_number }}</td>
+        <td data-label="Email">{{ house.email }}</td>
+        <td data-label="Latitude">{{ house.latitude }}</td>
+        <td data-label="Longitude">{{ house.longitude }}</td>
+        <td data-label="Address">{{ house.address }}</td>
+        <td data-label="Satellite Image">
+          <img src="{{ url_for('static', filename='uploads/' ~ house.satellite_image) }}" alt="Satellite Image">
+        </td>
+        <td data-label="Actions">
+          <div class="action-buttons">
+            <form action="{{ url_for('find_construction', house_id=house.id) }}" method="POST">
+              <button type="submit" class="btn-detect">Find Construction</button>
+            </form>
+            <form action="{{ url_for('delete_house', house_id=house.id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this house?');">
+              <button type="submit" class="btn-delete">Delete</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+<a href="{{ url_for('admin_dashboard') }}" class="back-btn">Back to Dashboard</a>
+<footer>
+    &copy; 2025 National Housing Monitoring System. All rights reserved.
+  </footer>
+</body>
+</html>

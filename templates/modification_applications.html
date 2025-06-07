@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Modification Applications</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 95%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #2980b9;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a.button {
+            padding: 8px 15px;
+            background: #27ae60;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        a.reject {
+            background: #c0392b;
+        }
+
+        a.button:hover {
+            background: #2ecc71;
+        }
+
+        a.reject:hover {
+            background: #e74c3c;
+        }
+  .back-btn {
+  margin: 30px auto;
+  display: block;
+  background: #007bff;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  width: fit-content;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+        img {
+            width: 60px;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+        }
+
+        header {
+            width: 100%;
+            background-color: #154360;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #dcdcdc;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 10px;
+            font-size: 13px;
+            color: #555;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo" class="ashoka-logo">
+        <div>
+            <h1>Government of India</h1>
+            <p>National Housing Monitoring System</p>
+        </div>
+    </div>
+</header>
+
+<h1>House Modification Applications</h1>
+
+<table>
+    <tr>
+        <th>Owner Name</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Address</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    {% for mod in modifications %}
+    <tr>
+        <td>{{ mod.house_name }}</td>
+        <td>{{ mod.latitude }}</td>
+        <td>{{ mod.longitude }}</td>
+        <td>{{ mod.address }}</td>
+        <td>{{ mod.reason }}</td>
+        <td>{{ mod.status }}</td>
+        <td>
+            <a href="{{ url_for('approve_modification', mod_id=mod.id) }}" class="button">Approve</a>
+            <a href="{{ url_for('reject_modification', mod_id=mod.id) }}" class="button reject">Reject</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{{ url_for('admin_dashboard') }}" class="back-btn">Back to Dashboard</a>
+<footer>
+    &copy; 2025 National Housing Monitoring System. All rights reserved.
+</footer>
+
+</body>
+</html>

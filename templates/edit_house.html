@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit House Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        img {
+            display: block;
+            margin: 10px auto;
+            width: 100px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit House Details</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        
+        <label for="owner_name">Owner Name:</label>
+        {{ form.owner_name(size=32) }}
+
+        <label for="latitude">Latitude:</label>
+        {{ form.latitude(size=32) }}
+
+        <label for="longitude">Longitude:</label>
+        {{ form.longitude(size=32) }}
+
+        <label for="satellite_image">Satellite Image:</label>
+        <input type="file" name="satellite_image" id="satellite_image">
+        
+        {% if house.satellite_image %}
+        <img src="{{ url_for('static', filename='uploads/' ~ house.satellite_image) }}" alt="House Image">
+        {% endif %}
+
+        <button type="submit">Update House</button>
+    </form>
+
+    <a href="{{ url_for('admin_dashboard') }}">Cancel</a>
+</body>
+</html>

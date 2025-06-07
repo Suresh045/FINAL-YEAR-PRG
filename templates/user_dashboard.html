@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+            margin: 0;
+min-height: 100vh
+            display: flex;
+ padding-top: 200px;
+            flex-direction: column;
+            align-items: center;
+ 	   
+        }
+
+        header {
+            width: 100%;
+            background-color: #154360;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+      header h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    color: white; 
+}
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #dcdcdc;
+        }
+
+        nav {
+            background-color: #2196f3;
+            padding: 10px 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+   /* Container styling with transparency and blur effect */
+.container {
+    width: 95%;
+    max-width: 1000px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.7); /* semi-transparent white */
+    backdrop-filter: blur(8px); /* Apply blur effect */
+    -webkit-backdrop-filter: blur(8px); /* Safari support */
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+        h1, h2, h3 {
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        h3 {
+            margin-top: 30px;
+            font-size: 1.5rem;
+        }
+
+        p, li {
+            font-size: 1.1rem;
+            color: #37474f;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+      .button {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color: #1e88e5;
+    padding: 10px 22px;
+    margin: 10px 10px 10px 0;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    /* Center the button in its container */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+        .button:hover {
+            background-color: #1565c0;
+        }
+
+        .btn-warning {
+            background-color: #f57c00;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-warning:hover {
+            background-color: #e65100;
+        }
+
+/* Approved and modification sections with transparency and blur effect */
+.approved-section,
+.modification-section {
+    margin-top: 30px;
+    padding: 25px;
+    border: 1px solid #cfd8dc;
+    border-radius: 20px;
+    background: rgba(249, 251, 231, 0.7); /* semi-transparent with original background color */
+    backdrop-filter: blur(8px); /* Apply blur effect */
+    -webkit-backdrop-filter: blur(8px); /* Safari support */
+    width: 100%;
+}
+
+.house-card {
+    border-bottom: 1px solid #cfd8dc;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.6); /* semi-transparent background */
+    backdrop-filter: blur(8px); /* optional blur effect */
+    -webkit-backdrop-filter: blur(8px); /* Safari support */
+    text-align: center; /* Centers the content inside the card */
+}
+
+        img {
+            display: block;
+            margin-top: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 10px;
+            font-size: 13px;
+            color: #555;
+            background-color: #1976d2;
+            color: white;
+            text-align: center;
+        }
+
+        strong {
+            color: #263238;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .ashoka-logo {
+            width: 60px;
+            height: 60px;
+            animation: rotate 10s linear infinite;
+        }
+
+.news-ticker {
+            background-color: #f8f9fa;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .news-label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .ticker-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker {
+            display: inline-block;
+            animation: ticker 25s linear infinite;
+        }
+
+        @keyframes ticker {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+
+/* Google Translate Button on the top-right */
+    .google-translate {
+        position: fixed; /* Fix the language selector */
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+.fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+</style>
+<!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'hi,ml,ta,te,kn,gu,bn,pa,or,mar,ur,ne', // Only Indian languages
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</head>
+
+<body>
+  
+<div class="fixed-header">
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo" class="ashoka-logo">
+            <div>
+                <h1>Government of India</h1>
+                <p>National Housing Monitoring System</p>
+            </div>
+        </div>
+   </header>
+    <!-- Google Translate Widget -->
+    <div class="google-translate" id="google_translate_element"></div>
+    <nav>
+        <a href="{{ url_for('home') }}"><i class="fas fa-home"></i>  Home</a>
+<a href="{{ url_for('apply_house') }}"><i class="fas fa-building"></i>  Apply for House</a>
+<a href="{{ url_for('logout') }}"><i class="fas fa-door-open"></i> Logout</a>
+<a href="{{ url_for('about') }}"><i class="fas fa-info-circle"></i> About</a>
+<a href="{{ url_for('help') }}"><i class="fas fa-question-circle"></i> Help</a>
+<a href="{{ url_for('contact') }}"><i class="fas fa-address-book"></i> Contact</a>
+<a href="{{ url_for('feedback') }}"><i class="fas fa-comment-dots"></i>  Feedback</a>
+
+    </nav>
+<div class="news-ticker">
+    <span class="news-label">Latest News:</span>
+    <div class="ticker-wrapper">
+        <div class="ticker">
+            <span>Phase 2 construction begins in Maharashtra | </span>
+            <span>Online application deadline extended to May 15 | </span>
+            <span>New housing policy announced by Ministry | </span>
+            <span>Real-time monitoring feature launched | </span>
+        </div>
+    </div>
+</div>
+</div> 
+
+    <div class="container">
+        <h1>Welcome, {{ current_user.username }}!</h1>
+        <p>You have successfully logged in.</p>
+
+        {% if current_user.applications %}
+            <h3>Your House Application Status</h3>
+            <ul>
+                {% for application in current_user.applications %}
+                    <li>
+                        <strong>House:</strong> {{ application.owner_name }}<br>
+                        <strong>Status:</strong> {{ application.status }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if current_user.approved_houses %}
+            <div class="approved-section">
+                <h3>🎉 Your Approved Houses</h3>
+                {% for house in current_user.approved_houses %}
+                    <div class="house-card">
+                        <p><strong>Owner Name:</strong> {{ house.owner_name }}</p>
+                        <p><strong>Address:</strong> {{ house.address }}</p>
+                        <p><strong>Latitude:</strong> {{ house.latitude }}</p>
+                        <p><strong>Longitude:</strong> {{ house.longitude }}</p>
+                        <img src="{{ url_for('static', filename='uploads/' + house.satellite_image) }}" alt="Approved House Image">
+                        <a href="{{ url_for('apply_modification', house_id=house.id) }}" class="btn-warning">Apply for Modification</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if current_user.modifications %}
+            <div class="modification-section">
+                <h3>Your Modification Request Status</h3>
+                <ul>
+                    {% for modification in current_user.modifications %}
+                        <li>
+                            <strong>House:</strong> {{ modification.house_name }}<br>
+                            <strong>Status:</strong> {{ modification.status }}<br>
+                            <strong>Reason:</strong> {{ modification.reason }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+{% include 'chat_widget.html' %}
+
+
+     <footer>
+        &copy; 2025 Government of India | Ministry of Housing & Urban Affairs
+    </footer>
+
+</body>
+</html>

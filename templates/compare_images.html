@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Compare Satellite Images</title>
+    <style>
+     body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+            
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+    h2, h3 {
+        color: #1e3c72;
+        margin-bottom: 25px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+   .section {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    width: 90%;
+    max-width: 1200px;
+    align-self: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 140px auto 10px auto; /* top | left/right | bottom | left/right */
+    text-align: center;
+}
+
+    .section:hover {
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+        transform: translateY(-3px);
+    }
+
+
+
+
+ .image-comparison-container {
+        display: flex;
+        gap: 40px; /* Space between the two image boxes */
+        align-items: flex-start;
+    }
+
+    .image-box {
+        width: 30%;
+    }
+
+    .image-box img {
+        width: 95%;
+        height: auto;
+        border: 1px solid #ccc;
+        padding: 5px;
+        border-radius: 8px;
+    }
+
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 18px;
+        text-align: left;
+        color: #333;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="file"],
+    select {
+        width: 100%;
+        padding: 12px;
+        margin-top: 8px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        transition: all 0.2s ease-in-out;
+    }
+    input:focus, select:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0,123,255,0.2);
+    }
+    button {
+        padding: 14px 28px;
+        margin-top: 25px;
+        background: linear-gradient(145deg, #007bff, #0056b3);
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 6px 18px rgba(0, 123, 255, 0.4);
+        transition: background 0.3s ease;
+    }
+    button:hover {
+        background: linear-gradient(145deg, #0056b3, #004494);
+    }
+   .btn-map {
+    background-color: #28a745;
+    color: white;
+    padding: 6px 12px; /* smaller size */
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+    cursor: pointer;
+    display: block;
+    margin: 10px auto; /* center the button */
+    text-align: center;
+}
+
+    }
+    .btn-map:hover {
+        background-color: #218838;
+    }
+    #mapContainer {
+        display: none;
+        width: 100%;
+        max-width: 700px;
+        height: 400px;
+        margin: 30px auto;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+    }
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    .back-btn {
+        display: inline-block;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        padding: 12px 25px;
+        background-color: #6c757d;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+        transition: background-color 0.2s ease;
+        margin: 10px auto; /* center the button */
+    text-align: center;
+    }
+    .back-btn:hover {
+        background-color: #5a6268;
+    }
+       img {
+            width: 60px;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+        }
+
+        header {
+            width: 100%;
+            background-color: #154360;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #dcdcdc;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 10px;
+            font-size: 13px;
+            color: #555;
+            text-align: center;
+        }
+.fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+</style>
+
+</head>
+<body>
+<div class="fixed-header">
+
+<header>
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo" class="ashoka-logo">
+        <div>
+            <h1>Government of India</h1>
+            <p>National Housing Monitoring System</p>
+        </div>
+    </div>
+</header>
+</div>
+   <div class="section">
+    <h2>Compare with New Image</h2>
+    <button class="btn-map" onclick="showMap({{ house.latitude }}, {{ house.longitude }})">View Map Location</button>
+
+    <div id="mapContainer">
+        <iframe id="mapFrame"></iframe>
+    </div>
+
+    <div class="image-comparison-container">
+        <div class="image-box">
+            <h3>Existing Satellite Image</h3>
+            <img src="{{ url_for('static', filename='uploads/' ~ house.satellite_image) }}" alt="Old Satellite">
+        </div>
+
+        <div class="image-box" id="preview-container" style="display: none;">
+            <h3>Uploaded New Image (Preview)</h3>
+            <img id="preview-image" src="#" alt="Preview">
+        </div>
+    </div>
+
+    <br>
+    <label for="file-input"><strong>Upload New (Recent) Image</strong></label>
+    <form action="{{ url_for('process_comparison', house_id=house.id) }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="new_image" id="file-input" accept="image/*" required>
+        <button type="submit">Compare Images</button>
+    </form>
+</div>
+
+
+
+    <div class="section">
+        <h2>Submit Construction Details</h2>
+        <form action="{{ url_for('save_construction_details', house_id=house.id) }}" method="POST" enctype="multipart/form-data">
+            <label for="owner_name">Owner Name:</label>
+            <input type="text" id="owner_name" name="owner_name" value="{{ house.owner_name }}" required>
+
+            <label for="latitude">Latitude:</label>
+            <input type="text" id="latitude" name="latitude" value="{{ house.latitude }}" required>
+
+            <label for="longitude">Longitude:</label>
+            <input type="text" id="longitude" name="longitude" value="{{ house.longitude }}" required>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" value="{{ house.address }}" required>
+
+            <label for="phone_number">Phone Number:</label>
+            <input type="text" id="phone_number" name="phone_number" value="{{ house.phone_number }}" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ house.email }}" required>
+
+            <label>Existing Image:</label>
+            <img src="{{ url_for('static', filename='uploads/' ~ house.satellite_image) }}" alt="Existing Image" style="width: 150px; margin-top: 10px;">
+
+            <label for="new_image">Upload New Image:</label>
+            <input type="file" id="new_image" name="new_image" accept="image/*" required>
+
+            <label for="modified_last_year">Modified in Last Year:</label>
+            <select id="modified_last_year" name="modified_last_year" required>
+                <option value="">--Select--</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label for="changes_detected">Changes Detected:</label>
+            <select id="changes_detected" name="changes_detected" required>
+                <option value="">--Select--</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <button type="submit">Submit Details</button>
+        </form>
+    </div>
+
+    <div class="section">
+        <h2>Check Modification Request Status</h2>
+        <form action="{{ url_for('check_modification_status') }}" method="POST">
+            <label for="search_lat">Latitude:</label>
+            <input type="text" name="search_lat" id="search_lat" value="{{ house.latitude }}" required>
+
+            <label for="search_lon">Longitude:</label>
+            <input type="text" name="search_lon" id="search_lon" value="{{ house.longitude }}" required>
+
+            <button type="submit">Search</button>
+        </form>
+
+        {% if mod_status %}
+            <p><strong>Status:</strong> {{ mod_status }}</p>
+        {% elif mod_status is not none %}
+            <p><strong>Status:</strong> Not Found</p>
+        {% endif %}
+
+    
+    </div>
+<div class="section">
+    <a href="{{ url_for('unauthorized_houses') }}" class="back-btn">← Back to Unauthorized Houses</a>
+</div>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const previewContainer = document.getElementById('preview-container');
+        const previewImage = document.getElementById('preview-image');
+
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewContainer.style.display = 'inline-block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.style.display = 'none';
+            }
+        });
+
+        function showMap(lat, lon) {
+            if (lat && lon) {
+                const mapUrl = `https://www.google.com/maps?q=${lat},${lon}&t=k&z=20&output=embed`;
+                document.getElementById("mapFrame").src = mapUrl;
+                document.getElementById("mapContainer").style.display = "block";
+            } else {
+                alert("Latitude and Longitude not available.");
+            }
+        }
+    </script>
+<footer>
+    &copy; 2025 National Housing Monitoring System. All rights reserved.
+</footer>
+</body>
+</html>

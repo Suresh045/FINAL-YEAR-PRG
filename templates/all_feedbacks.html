@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Feedbacks</title>
+    <style>
+        /* Basic body styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
+        }
+
+        /* Header styles */
+        header {
+            width: 100%;
+            background-color: #154360;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #dcdcdc;
+        }
+
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Centering the feedback section */
+        .feedback-section {
+            width: 100%;
+            max-width: 800px;
+            margin-top: 120px; /* To prevent overlap with fixed header */
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Feedback card styles */
+        .feedback-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            
+        }
+
+        .feedback-card h3 {
+            font-size: 1.2rem;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        
+
+.feedback-card p {
+    font-size: 1rem;
+    margin: 10px 0;
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden;    /* Hides overflowing text */
+    text-overflow: ellipsis; /* Adds "..." at the end of the text if it overflows */
+}
+
+        .feedback-card small {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Back button styles */
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #154360;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #1f568b;
+        }
+
+        /* Footer styles */
+        footer {
+            margin-top: auto;
+            padding: 10px;
+            font-size: 13px;
+            color: #555;
+            background-color: #f4f4f4;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Logo container styles */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .ashoka-logo {
+            width: 60px;
+            height: 60px;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-header">
+        <header>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo" class="ashoka-logo">
+                <div>
+                    <h1>Government of India</h1>
+                    <p>National Housing Monitoring System</p>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="feedback-section">
+        <h1>All Feedbacks</h1>
+        <div>
+            {% for feedback in feedbacks %}
+                <div class="feedback-card">
+                    <h3>{{ feedback.username }}</h3>
+                    <p>{{ feedback.feedback_text }}</p>
+                    <small>{{ feedback.timestamp }}</small>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Back Button -->
+        <a href="javascript:history.back()" class="back-button">Go Back</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 National Housing Monitoring System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

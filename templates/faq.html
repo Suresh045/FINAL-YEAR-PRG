@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - National Housing Monitoring System</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='ashoka.png') }}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #eaf2f8, #d6eaf8);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background-color: #154360;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #dcdcdc;
+        }
+
+        .content {
+            margin-top: 60px;
+            text-align: center;
+            width: 80%;
+        }
+
+        .content h2 {
+            font-size: 2.3rem;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        .faq-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .faq-section h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .faq-section p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .back-btn:hover {
+            background-color: #2980b9;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 10px;
+            font-size: 13px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Government of India</h1>
+        <p>National Housing Monitoring System</p>
+    </header>
+
+    <div class="content">
+        <h2>Frequently Asked Questions (FAQ)</h2>
+
+        <div class="faq-section">
+            <h3>How to apply for housing?</h3>
+            <p>To apply for housing, visit the 'Register' page, fill in your personal details, and upload the required documents. After that, your application will be reviewed, and you will be notified regarding the status of your application.</p>
+        </div>
+
+        <div class="faq-section">
+            <h3>How to track my application status?</h3>
+            <p>You can track the status of your application by logging into your user account. Once logged in, navigate to your dashboard to check for any updates on your housing application.</p>
+        </div>
+
+        <div class="faq-section">
+            <h3>Who is eligible for housing?</h3>
+            <p>The eligibility criteria for housing depend on various factors, such as income, location, and availability of housing in your area. Please refer to the 'Eligibility Criteria' section on the website for more detailed information.</p>
+        </div>
+
+        <div class="faq-section">
+            <h3>What documents are required for application?</h3>
+            <p>The following documents are required for housing application:
+                <ul>
+                    <li>Proof of identity (Aadhar card, passport, etc.)</li>
+                    <li>Proof of residence</li>
+                    <li>Income certificate</li>
+                    <li>Photographs</li>
+                </ul>
+            </p>
+        </div>
+
+        <a href="{{ url_for('home') }}" class="back-btn">← Back to Home</a>
+    </div>
+
+    <footer>
+        &copy; 2025 Government of India. All rights reserved.
+    </footer>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background-color: #154360;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #dcdcdc;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .ashoka-logo {
+            width: 60px;
+            height: 60px;
+            animation: rotate 10s linear infinite;
+        }
+
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .feedback-container {
+            max-width: 600px;
+            margin: 160px auto 40px; /* pushes it below the fixed header */
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .feedback-container h3 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .feedback-container input,
+        .feedback-container textarea {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .feedback-container textarea:focus,
+        .feedback-container input:focus {
+            outline: none;
+            border-color: #4caf50;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+        }
+
+        .feedback-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4caf50;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .feedback-container button:hover {
+            background-color: #45a049;
+        }
+.back-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #154360;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background-color: #1f568b;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="fixed-header">
+        <header>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo" class="ashoka-logo">
+                <div>
+                    <h1>Government of India</h1>
+                    <p>National Housing Monitoring System</p>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="feedback-container">
+        <h3>We value your feedback</h3>
+        <form action="/submit_feedback" method="POST">
+            <input type="text" name="username" value="{{ current_user.username }}" readonly>
+            <textarea name="feedback" placeholder="Write your thoughts here..." required></textarea>
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+<a href="javascript:history.back()" class="back-button">Go Back</a>
+
+
+</body>
+</html>

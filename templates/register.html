@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-image: url("{{ url_for('static', filename='background.jpg') }}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 10px; /* Adjust padding for the fixed header */
+    }
+
+    header {
+        position: fixed; /* Fix the header at the top */
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #154360;
+        color: white;
+        padding: 20px 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        z-index: 1000; /* Ensures header stays on top of other elements */
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .logo-container img {
+        height: 60px;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2rem;
+        letter-spacing: 1px;
+color:white;
+    }
+
+    header p {
+        margin: 5px 0 0;
+        font-size: 14px;
+        color: #dcdcdc;
+    }
+
+    .register-container {
+    background-color: rgba(255, 255, 255, 0.6); /* White with 85% opacity */
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    margin-top: 120px; /* Ensure form is below the fixed header */
+}
+
+
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 12px;
+        width: 100%;
+        border-radius: 8px;
+        font-size: 16px;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .back-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        width: 100%;
+        border-radius: 8px;
+        font-size: 16px;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .back-button:hover {
+        background-color: #0056b3;
+    }
+
+    p {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    footer {
+        margin-top: auto;
+        padding: 10px;
+        font-size: 13px;
+        color: white;
+    }
+
+    /* Google Translate Button on the top-right */
+    .google-translate {
+        position: fixed; /* Fix the language selector */
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    
+</style>
+
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'hi,ml,ta,te,kn,gu,bn,pa,or,mar,ur,ne', // Only Indian languages
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo">
+            <div>
+                <h1>Government of India</h1>
+                <p>National Housing Monitoring System</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Google Translate Widget -->
+    <div class="google-translate" id="google_translate_element"></div>
+
+    <div class="register-container">
+        <h1>User Registration</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            
+            <label>Username:</label>
+            {{ form.username() }}
+
+            <label>Email:</label>
+            {{ form.email() }}
+
+            <label>Password:</label>
+            {{ form.password() }}
+
+            <label>Confirm Password:</label>
+            {{ form.confirm_password() }}
+
+            {{ form.submit() }}
+        </form>
+        <p>Already have an account? <a href="{{ url_for('user_login') }}">Login</a></p>
+
+        <!-- Back to Home button -->
+        <form action="{{ url_for('home') }}" method="get">
+            <button type="submit" class="back-button">Back to Home</button>
+        </form>
+    </div>
+
+    <footer>
+        &copy; 2025 Government of India. All rights reserved.
+    </footer>
+</body>
+</html>

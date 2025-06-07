@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Applications</title>
+  <style>
+.back-btn {
+  margin: 30px auto;
+  display: block;
+  background: #007bff;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  width: fit-content;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+    
+ 
+  body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+     
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #2c3e50;
+      color: white;
+    }
+
+    td {
+      color: #2c3e50;
+    }
+
+    button {
+      padding: 8px 16px;
+      margin: 2px 0;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    button[type="submit"] {
+      background-color: #27ae60;
+    }
+
+    button[style*="background-color: #e74c3c"] {
+      background-color: #e74c3c !important;
+    }
+
+    button[style*="background-color: #8e44ad"] {
+      background-color: #8e44ad !important;
+    }
+
+    input[type="text"], input[type="file"] {
+      padding: 7px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      margin-right: 10px;
+    }
+
+    .upload-section {
+      background-color: #ecf0f1;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    #mapContainer {
+      display: none;
+      margin-top: 30px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    #mapFrame {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+      th, td {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      button {
+        padding: 6px 10px;
+        font-size: 13px;
+      }
+    }
+ img {
+      width: 60px;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+    }
+  header {
+      width: 100%;
+      background-color: #154360;
+      color: white;
+      padding: 20px 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      color: #dcdcdc;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 10px;
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+    }
+
+  </style>
+  <script>
+    function showMap(lat, lon) {
+      if (lat && lon) {
+        var mapUrl = `https://www.google.com/maps?q=${lat},${lon}&t=k&z=20&output=embed`;
+        document.getElementById("mapFrame").src = mapUrl;
+        document.getElementById("mapContainer").style.display = "block";
+        window.scrollTo({ top: document.getElementById("mapContainer").offsetTop, behavior: "smooth" });
+      } else {
+        alert("Latitude and Longitude not available.");
+      }
+    }
+  </script>
+</head>
+<body>
+ <header>
+    <div class="logo-container">
+      <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo" class="ashoka-logo">
+      <div>
+        <h1>Government of India</h1>
+        <p>National Housing Monitoring System</p>
+      </div>
+    </div>
+  </header>
+
+  <h2>Pending House Applications</h2>
+  {% if applications %}
+  <table>
+    <tr>
+      <th>Owner Name</th>
+      <th>Phone Number</th>
+      <th>Email</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>House Address</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    {% for application in applications %}
+    {% if application.status == 'Pending' %}
+    <tr>
+      <td>{{ application.owner_name }}</td>
+      <td>{{ application.phone_number }}</td>
+      <td>{{ application.email }}</td>
+      <td>{{ application.latitude }}</td>
+      <td>{{ application.longitude }}</td>
+      <td>{{ application.house_address }}</td>
+      <td>{{ application.status }}</td>
+      <td>
+        <form action="{{ url_for('approve_reject_application', application_id=application.id, action='approve') }}" method="POST" style="display:inline;">
+          <button type="submit">Approve</button>
+        </form>
+        <form action="{{ url_for('approve_reject_application', application_id=application.id, action='reject') }}" method="POST" style="display:inline;">
+          <input type="text" name="rejection_reason" placeholder="Reason (optional)">
+          <button type="submit" style="background-color: #e74c3c;">Reject</button>
+        </form>
+        <button onclick="showMap({{ application.latitude }}, {{ application.longitude }})" style="background-color: #8e44ad;">
+          View Map
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="8">
+        <div class="upload-section">
+          <form action="{{ url_for('add_house_from_application', application_id=application.id) }}" method="POST" enctype="multipart/form-data">
+            <label><strong>Upload Satellite Image:</strong></label>
+            <input type="file" name="satellite_image" required>
+            <button type="submit">Add House</button>
+          </form>
+        </div>
+      </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </table>
+  {% else %}
+  <p style="text-align:center;">No applications to display.</p>
+  {% endif %}
+
+  <div id="mapContainer">
+    <h3>Google Maps Satellite View:</h3>
+    <iframe id="mapFrame"></iframe>
+  </div>
+<a href="{{ url_for('admin_dashboard') }}" class="back-btn">Back to Dashboard</a>
+<footer>
+    &copy; 2025 National Housing Monitoring System. All rights reserved.
+  </footer>
+</body>
+</html>

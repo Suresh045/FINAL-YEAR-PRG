@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apply for House Modification</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background-color: #154360;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+.fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #dcdcdc;
+        }
+
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .ashoka-logo {
+            width: 60px;
+            height: 60px;
+            animation: rotate 10s linear infinite;
+        }
+
+        nav {
+            background-color: #2196f3;
+            padding: 10px 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+  .form-container {
+    background: rgba(255, 255, 255, 0.6); /* semi-transparent white */
+    backdrop-filter: blur(8px); /* Apply blur effect */
+    -webkit-backdrop-filter: blur(8px); /* Safari support */
+    padding: 40px 40px; /* Adjust padding as needed */
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin-top: 180px;  /* Creates some space between the header and form */
+    transition: backdrop-filter 0.3s ease;
+}
+
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 20px;
+            display: block;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #2c3e50;
+            margin: 8px 0;
+        }
+
+        strong {
+            color: #263238;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 22px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1c5980;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 10px;
+            font-size: 13px;
+            color: #fff;
+            background-color: #1976d2;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="fixed-header">
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo" class="ashoka-logo">
+            <div>
+                <h1>Government of India</h1>
+                <p>National Housing Monitoring System</p>
+            </div>
+        </div>
+    </header>
+ 
+    <nav>
+        <a href="{{ url_for('home') }}">🏠 Home</a>
+        <a href="{{ url_for('apply_house') }}">🏡 Apply for House</a>
+        <a href="{{ url_for('logout') }}">🚪 Logout</a>
+    </nav>
+ </div>
+    <div class="form-container">
+        <h2>Apply for House Modification</h2>
+        <form method="POST">
+            <p><strong>Owner:</strong> {{ house.owner_name }}</p>
+            <p><strong>Latitude:</strong> {{ house.latitude }}</p>
+            <p><strong>Longitude:</strong> {{ house.longitude }}</p>
+            <p><strong>Address:</strong> {{ house.address }}</p>
+
+            <label for="reason">Reason for Modification:</label>
+            <textarea name="reason" required></textarea>
+
+  <div style="display: flex; justify-content: space-between; gap: 10px; margin-top: 20px;">
+    <button type="submit">Submit Modification Request</button>
+    <a href="{{ url_for('user_dashboard') }}">
+        <button type="button" style="background-color: #555;">⬅️ Back to Dashboard</button>
+    </a>
+</div>
+
+
+        </form>
+    </div>
+
+    <footer>
+        &copy; 2025 National Housing Monitoring System. All rights reserved.
+    </footer>
+</body>
+</html>

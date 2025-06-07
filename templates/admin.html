@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN Login - National Housing Monitoring System</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='ashoka.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <div id="google_translate_element" style="position: absolute; top: 20px; right: 20px;"></div>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background-color: #154360;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #dcdcdc;
+        }
+
+        .content {
+    margin-top: 40px;
+    background: rgba(255, 255, 255, 0.15); /* semi-transparent white */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* for Safari */
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    width: 100%;
+    max-width: 400px;
+}
+
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 10px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .ashoka-logo {
+            width: 60px;
+            height: 60px;
+            animation: rotate 10s linear infinite;
+        }
+
+        /* Password visibility toggle */
+        .password-container {
+            position: relative;
+        }
+
+        #toggleIcon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        /* 3D Card Effect */
+        
+form {
+    background: rgba(255, 255, 255, 0.15); /* semi-transparent white */
+    backdrop-filter: blur(0); /* No blur by default */
+    -webkit-backdrop-filter: blur(0); /* Safari support */
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 
+        0 15px 25px rgba(0, 0, 0, 0.2), 
+        0 10px 10px rgba(0, 0, 0, 0.1), 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: perspective(1000px) rotateX(2deg) rotateY(1deg);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+form:hover {
+    backdrop-filter: blur(12px); /* Blur effect on hover */
+    -webkit-backdrop-filter: blur(12px); /* Safari support */
+}
+
+
+
+
+
+/* Google Translate Button on the top-right */
+    .google-translate {
+        position: fixed; /* Fix the language selector */
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo" class="ashoka-logo">
+            <div>
+                <h1>Government of India</h1>
+                <p>National Housing Monitoring System</p>
+            </div>
+        </div>
+    </header>
+  <!-- Google Translate Widget -->
+    <div class="google-translate" id="google_translate_element"></div>
+    <div class="content">
+        <h2>Admin Login</h2>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <label>Email:</label>
+            {{ form.email(size=32) }}
+
+            <label>Password:</label>
+            <div class="password-container">
+                {{ form.password(size=32, id='password') }}
+                <span onclick="togglePassword()" id="toggleIcon">
+                    <i class="fa-solid fa-eye"></i>
+                </span>
+            </div>
+
+            {{ form.submit(class_="btn") }}
+        </form>
+        <p>Admin? <a href="{{ url_for('admin_login') }}">Login as Admin</a></p>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="{{ url_for('home') }}" class="back-button">← Back to Home</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Government of India. All rights reserved.
+    </footer>
+
+    <script>
+        function togglePassword() {
+            const passwordField = document.getElementById("password");
+            const toggleIcon = document.getElementById("toggleIcon").firstElementChild;
+            const isPassword = passwordField.type === "password";
+
+            passwordField.type = isPassword ? "text" : "password";
+            toggleIcon.className = isPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye";
+        }
+    </script>
+<script type="text/javascript" 
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+</body>
+</html>

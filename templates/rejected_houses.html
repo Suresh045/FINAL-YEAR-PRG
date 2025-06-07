@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rejected Houses</title>
+  <style>
+   
+ body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 32px;
+      color: #721c24;
+      margin-bottom: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #dc3545;
+      color: white;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #fcebea;
+    }
+
+    img {
+      width: 60px;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+    }
+
+    .back-btn {
+      margin: 30px auto;
+      display: block;
+      background: #721c24;
+      color: white;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      text-align: center;
+      text-decoration: none;
+      width: fit-content;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #5c151c;
+    }
+header {
+      width: 100%;
+      background-color: #154360;
+      color: white;
+      padding: 20px 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      color: #dcdcdc;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 10px;
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<header>
+    <div class="logo-container">
+      <img src="{{ url_for('static', filename='ashoka.png') }}" alt="Ashoka Logo" class="ashoka-logo">
+      <div>
+        <h1>Government of India</h1>
+        <p>National Housing Monitoring System</p>
+      </div>
+    </div>
+  </header>
+  <h2>Rejected Houses</h2>
+
+  <table>
+    <tr>
+      <th>Owner Name</th>
+      <th>Phone Number</th>
+      <th>Email</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Address</th>
+      <th>Satellite Image</th>
+      <th>Reason (Optional)</th>
+    </tr>
+    {% for house in rejected_houses %}
+    <tr>
+      <td>{{ house.owner_name }}</td>
+      <td>{{ house.phone_number }}</td>
+      <td>{{ house.email }}</td>
+      <td>{{ house.latitude }}</td>
+      <td>{{ house.longitude }}</td>
+      <td>{{ house.house_address }}</td>
+      <td>
+        {% if house.satellite_image %}
+          <img src="{{ url_for('static', filename='uploads/' ~ house.satellite_image) }}" alt="Satellite Image">
+        {% else %}
+          No Image
+        {% endif %}
+      </td>
+      <td>{{ house.rejection_reason or "Not Provided" }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <a href="{{ url_for('admin_dashboard') }}" class="back-btn">Back to Dashboard</a>
+ <footer>
+    &copy; 2025 National Housing Monitoring System. All rights reserved.
+  </footer>
+</body>
+</html>

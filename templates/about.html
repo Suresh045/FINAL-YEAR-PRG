@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About - National Housing Monitoring System</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='ashoka.png') }}">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #eaf2f8, #d6eaf8);
+            margin: 0;
+            padding: 0;
+            color: #2c3e50;
+        }
+
+        header {
+            background-color: #154360;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 40px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            color: #555;
+        }
+
+.back-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.back-button {
+    padding: 10px 20px;
+    background-color: #154360;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background-color: #1f568b;
+}
+
+
+ /* Google Translate Button on the top-right */
+    .google-translate {
+        position: fixed; /* Fix the language selector */
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+    </style>
+ <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'hi,ml,ta,te,kn,gu,bn,pa,or,mar,ur,ne', // Only Indian languages
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</head>
+<body>
+    <header>
+        <h2>About Us</h2>
+    </header>
+  <!-- Google Translate Widget -->
+    <div class="google-translate" id="google_translate_element"></div>
+
+
+    <div class="container">
+        <h1>National Housing Monitoring System</h1>
+        <p>
+            The National Housing Monitoring System is an initiative by the Government of India to modernize and digitize the process of housing approvals, construction tracking, and urban development monitoring across the country.
+        </p>
+        <p>
+            Our platform provides a user-friendly portal for citizens, developers, and administrators to manage housing-related requests efficiently. With real-time satellite image integration, AI-based construction detection, and location tracking, the system ensures transparency, accountability, and faster decision-making in housing development.
+        </p>
+        <p>
+            We aim to streamline the approval process, reduce manual paperwork, and provide a digital one-stop solution to improve the overall housing experience for both government officials and citizens.
+        </p>
+    </div>
+<div class="back-button-container">
+    <a href="javascript:history.back()" class="back-button">Go Back</a>
+</div>
+
+
+    <footer>
+        &copy; 2025 Government of India. All rights reserved.
+    </footer>
+</body>
+</html>

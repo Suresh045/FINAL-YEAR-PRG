@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Housing Monitoring System</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='ashoka.png') }}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #eaf2f8, #d6eaf8);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background-color: #154360;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #dcdcdc;
+        }
+
+        .content {
+            margin-top: 60px;
+            text-align: center;
+            width: 80%;
+        }
+
+        .content h2 {
+            font-size: 2.3rem;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        .contact-section,
+        .accessibility-section,
+        .schemes-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .contact-section h3,
+        .accessibility-section h3,
+        .schemes-section h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .contact-section p,
+        .accessibility-section p,
+        .schemes-section p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .high-contrast {
+            background-color: #333;
+            color: white;
+        }
+
+        .font-size-btns {
+            margin-top: 20px;
+        }
+
+        .font-size-btns button {
+            background-color: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-right: 10px;
+        }
+
+        .font-size-btns button:hover {
+            background-color: #2980b9;
+        }
+
+        .schemes-card {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .schemes-card h4 {
+            color: #2980b9;
+        }
+
+    .back-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.back-button {
+    padding: 10px 20px;
+    background-color: #154360;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background-color: #1f568b;
+}
+
+
+        footer {
+            margin-top: auto;
+            padding: 10px;
+            font-size: 13px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Government of India</h1>
+        <p>National Housing Monitoring System</p>
+    </header>
+
+    <div class="content">
+        <h2>Helpline & Contact Info</h2>
+
+        <div class="contact-section">
+            <h3>Contact Us</h3>
+            <p>If you have any queries, feel free to reach out to us:</p>
+            <p><strong>Toll-Free Number:</strong> 1800-123-4567</p>
+            <p><strong>Email:</strong> support@housingindia.gov.in</p>
+        </div>
+
+        <h2>Accessibility Features</h2>
+
+        <div class="accessibility-section">
+            <h3>High Contrast Mode</h3>
+            <button onclick="toggleContrast()">Toggle High Contrast Mode</button>
+        </div>
+
+        <div class="font-size-btns">
+            <button onclick="resizeFont('increase')">Increase Font Size</button>
+            <button onclick="resizeFont('decrease')">Decrease Font Size</button>
+        </div>
+
+        <h2>Government Housing Schemes</h2>
+
+        <div class="schemes-section">
+            <h3>Government Schemes</h3>
+            <div class="schemes-card">
+                <h4>Pradhan Mantri Awas Yojana (PMAY)</h4>
+                <p>PMAY aims to provide affordable housing for all. Apply for urban and rural housing schemes here.</p>
+            </div>
+
+            <div class="schemes-card">
+                <h4>Affordable Rental Housing</h4>
+                <p>Affordable rental housing schemes aim to provide affordable housing solutions for low-income families.</p>
+            </div>
+
+            <div class="schemes-card">
+                <h4>Housing for All</h4>
+                <p>This scheme aims to provide homes to all eligible citizens by the year 2025.</p>
+            </div>
+        </div>
+    </div>
+<div class="back-button-container">
+    <a href="javascript:history.back()" class="back-button">Go Back</a>
+</div>
+
+    <footer>
+        &copy; 2025 Government of India. All rights reserved.
+    </footer>
+
+   
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us - National Housing Monitoring System</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='ashoka.png') }}">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #eaf2f8, #d6eaf8);
+            margin: 0;
+            padding: 0;
+            color: #2c3e50;
+        }
+
+        header {
+            background-color: #154360;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 40px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            color: #555;
+        }
+.back-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.back-button {
+    padding: 10px 20px;
+    background-color: #154360;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background-color: #1f568b;
+}
+
+  /* Google Translate Button on the top-right */
+    .google-translate {
+        position: fixed; /* Fix the language selector */
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    </style>
+ <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'hi,ml,ta,te,kn,gu,bn,pa,or,mar,ur,ne', // Only Indian languages
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+    <header>
+        <h2>Contact Us</h2>
+    </header>
+  <!-- Google Translate Widget -->
+    <div class="google-translate" id="google_translate_element"></div>
+
+
+    <div class="container">
+        <h1>We're here to help</h1>
+        <div class="contact-info">
+            <p><strong>Email:</strong> governmentconstructionfindout@gmail.com</p>
+            <p><strong>Phone:</strong> +91-123-456-7890</p>
+            <p><strong>Address:</strong> Ministry of Housing, Government of India, New Delhi - 110001</p>
+            <p><strong>Working Hours:</strong> Monday to Friday, 9:00 AM to 5:00 PM</p>
+        </div>
+    </div>
+
+<div class="back-button-container">
+    <a href="javascript:history.back()" class="back-button">Go Back</a>
+</div>
+
+
+    <footer>
+        &copy; 2025 Government of India. All rights reserved.
+    </footer>
+</body>
+</html>
